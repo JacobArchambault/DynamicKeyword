@@ -1,23 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using static System.Console;
 namespace DynamicKeyword
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            Console.WriteLine("***** Fun with the dynamic keyword *****");
+            WriteLine("***** Fun with the dynamic keyword *****");
+
+            UseObjectVariable();
+
             PrintThreeStrings();
-            Console.WriteLine();
 
             ChangeDynamicDataType();
-            Console.WriteLine();
 
             InvokeMembersOnDynamicData();
-            Console.WriteLine();
 
-            Console.ReadLine();
+            VeryDynamicClass d = new VeryDynamicClass();
+            WriteLine($"Dynamic method returned {d.DynamicMethod("foobar")}");
+
+            ReadLine();
         }
         static void ImplicitlyTypedVariable()
         {
@@ -26,25 +29,29 @@ namespace DynamicKeyword
             // This would be a compile-time error.
             // a = "Hello";
         }
-        static void UseObjectVarible()
+        static void UseObjectVariable()
         {
             // Assume we have a class named Person.
             object o = new Person() { FirstName = "Mike", LastName = "Larson" };
 
             // Must cast object as Person to gain access to the Person properties.
-            Console.WriteLine("Person's first name is {0}", ((Person)o).FirstName);
+            WriteLine("Person's first name is {0}", ((Person)o).FirstName);
+            WriteLine();
+
         }
         static void ChangeDynamicDataType()
         {
             // Declare a single dynamic data point named "t".
             dynamic t = "Hello!";
-            Console.WriteLine("t is of type: {0}", t.GetType());
+            WriteLine("t is of type: {0}", t.GetType());
 
             t = false;
-            Console.WriteLine("t is of type: {0}", t.GetType());
+            WriteLine("t is of type: {0}", t.GetType());
 
             t = new List<int>();
-            Console.WriteLine("t is of type: {0}", t.GetType());
+            WriteLine("t is of type: {0}", t.GetType());
+            WriteLine();
+
         }
         static void InvokeMembersOnDynamicData()
         {
@@ -52,14 +59,16 @@ namespace DynamicKeyword
 
             try
             {
-                Console.WriteLine(textData1.ToUpper());
-                Console.WriteLine(textData1.toupper());
-                Console.WriteLine(textData1.Foo(10, "ee", DateTime.Now));
+                WriteLine(textData1.ToUpper());
+                WriteLine(textData1.toupper());
+                WriteLine(textData1.Foo(10, "ee", DateTime.Now));
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException ex)
             {
-                Console.WriteLine(ex.Message);
+                WriteLine(ex.Message);
             }
+            WriteLine();
+
         }
         static void PrintThreeStrings()
         {
@@ -67,9 +76,11 @@ namespace DynamicKeyword
             object s2 = "From";
             dynamic s3 = "Minneapolis";
 
-            Console.WriteLine("s1 is of type: {0}", s1.GetType());
-            Console.WriteLine("s2 is of type: {0}", s2.GetType());
-            Console.WriteLine("s3 is of type: {0}", s3.GetType());
+            WriteLine("s1 is of type: {0}", s1.GetType());
+            WriteLine("s2 is of type: {0}", s2.GetType());
+            WriteLine("s3 is of type: {0}", s3.GetType());
+            WriteLine();
+
         }
     }
 }
