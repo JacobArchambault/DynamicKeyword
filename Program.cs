@@ -9,6 +9,8 @@ namespace DynamicKeyword
         {
             WriteLine("***** Fun with the dynamic keyword *****");
 
+            ImplicitlyTypedVariable();
+
             UseObjectVariable();
 
             PrintThreeStrings();
@@ -28,6 +30,7 @@ namespace DynamicKeyword
             var a = new List<int> { 90 };
             // This would be a compile-time error.
             // a = "Hello";
+            WriteLine(a);
         }
         static void UseObjectVariable()
         {
@@ -36,6 +39,18 @@ namespace DynamicKeyword
 
             // Must cast object as Person to gain access to the Person properties.
             WriteLine("Person's first name is {0}", ((Person)o).FirstName);
+            WriteLine();
+
+        }
+        static void PrintThreeStrings()
+        {
+            var s1 = "Greetings";
+            object s2 = "From";
+            dynamic s3 = "Minneapolis";
+
+            WriteLine("s1 is of type: {0}", s1.GetType());
+            WriteLine("s2 is of type: {0}", s2.GetType());
+            WriteLine("s3 is of type: {0}", s3.GetType());
             WriteLine();
 
         }
@@ -67,18 +82,6 @@ namespace DynamicKeyword
             {
                 WriteLine(ex.Message);
             }
-            WriteLine();
-
-        }
-        static void PrintThreeStrings()
-        {
-            var s1 = "Greetings";
-            object s2 = "From";
-            dynamic s3 = "Minneapolis";
-
-            WriteLine("s1 is of type: {0}", s1.GetType());
-            WriteLine("s2 is of type: {0}", s2.GetType());
-            WriteLine("s3 is of type: {0}", s3.GetType());
             WriteLine();
 
         }
